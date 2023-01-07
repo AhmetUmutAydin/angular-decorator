@@ -1,4 +1,5 @@
-export enum StorageType {
+export enum CacheType {
+  Default,
   LocalStorage,
   SessionStorage,
 }

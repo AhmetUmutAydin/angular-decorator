@@ -1,2 +1,2 @@
 export * from './http-method.enum';
-export * from './storage-type.enum';
+export * from './cache-type.enum';
