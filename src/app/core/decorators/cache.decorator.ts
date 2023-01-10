@@ -1,9 +1,7 @@
 import { isObservable, of, tap } from 'rxjs';
 import { CacheType } from '../enums';
 
-const map = new Map<string, any>();
-
-export const Caching = (cacheType: CacheType = CacheType.Default) => {
+export const Caching = (cacheType: CacheType = CacheType.SessionStorage) => {
   return (target: any, prop: string, descriptor: any) => {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any) {
@@ -43,9 +41,7 @@ const getData = (
   cacheType: CacheType,
   key: string
 ): { value: any; isObservable: boolean } => {
-  return cacheType === CacheType.Default
-    ? map.get(key)
-    : cacheType === CacheType.LocalStorage
+  return cacheType === CacheType.LocalStorage
     ? getDataLocalStorage(key)
     : getDataSessionStorage(key);
 };
@@ -56,9 +52,7 @@ const cacheData = (
   value: any,
   isObservable = false
 ) => {
-  cacheType === CacheType.Default
-    ? map.set(key, value)
-    : cacheType === CacheType.LocalStorage
+  cacheType === CacheType.LocalStorage
     ? cacheLocalStorage(key, value, isObservable)
     : cacheSessionStorage(key, value, isObservable);
 };
