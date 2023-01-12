@@ -1,11 +1,11 @@
 import * as memoizee from 'memoizee';
 
-export function memoize() {
-  return function (target: any, propertyKey: string, descriptor: any) {
+export const memoize = (config: {}) => {
+  return (target: any, propertyKey: string, descriptor: any) => {
     const orginalMethod = descriptor.value;
-    const memoizee = memoizee(orginalMethod);
+    const memoized = memoizee(orginalMethod, config);
     descriptor.value = function () {
-      return memoizee.apply(this, arguments);
+      return memoized.apply(this, arguments);
     };
   };
-}
+};
