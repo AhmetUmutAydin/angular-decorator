@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Caching } from '../decorators';
+import { Caching, MethodTimer } from '../decorators';
 import { Post } from '../models';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class PostService {
   constructor(public httpClient: HttpClient) {}
 
   //@Mockup(PostMockUp.posts)
-  @Caching()
+  @MethodTimer()
   getPosts(): Observable<Post[]> {
     return this.httpClient.get<Post[]>(this.url);
   }
