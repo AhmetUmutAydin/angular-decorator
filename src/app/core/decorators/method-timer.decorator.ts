@@ -6,27 +6,23 @@ export const MethodTimer = () => {
   return (target: any, propertyKey: string, descriptor: any) => {
     descriptor.value = function (...args: any[]) {
       const orginalMethod = descriptor.value;
-      startTimer();
+      const startTime = performance.now();
       const result = orginalMethod.apply(this);
       if (isObservable(result)) {
         return result.pipe(
           tap(() => {
-            stopTimer();
+            const stopTime = performance.now();
+            const time = startTime - stopTime;
+            console.log(time);
           })
         );
       } else {
-        stopTimer();
+        const stopTime = performance.now();
+        const time = startTime - stopTime;
+        console.log(time);
         return result;
       }
     };
     return descriptor;
   };
 };
-
-function startTimer() {
-  this.interval = setInterval(() => {}, 1000);
-}
-
-function stopTimer() {
-  clearInterval(this.interval);
-}
