@@ -1,13 +1,12 @@
 import { isObservable, tap } from 'rxjs';
 
-let interval: any;
-
 export const MethodTimer = () => {
   return (target: any, propertyKey: string, descriptor: any) => {
     descriptor.value = function (...args: any[]) {
       const orginalMethod = descriptor.value;
       const startTime = performance.now();
       const result = orginalMethod.apply(this);
+
       if (isObservable(result)) {
         return result.pipe(
           tap(() => {
