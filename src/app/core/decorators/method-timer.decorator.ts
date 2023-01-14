@@ -2,22 +2,22 @@ import { isObservable, tap } from 'rxjs';
 
 export const MethodTimer = () => {
   return (target: any, propertyKey: string, descriptor: any) => {
-    descriptor.value = function (...args: any[]) {
-      const orginalMethod = descriptor.value;
-      const startTime = performance.now();
-      const result = orginalMethod.apply(this);
+    const originalMethod = descriptor.value;
 
+    descriptor.value = function (...args: any[]) {
+      const startTime = performance.now();
+      const result = originalMethod.apply(this);
       if (isObservable(result)) {
         return result.pipe(
           tap(() => {
             const stopTime = performance.now();
-            const time = startTime - stopTime;
+            const time = stopTime - startTime;
             console.log(time);
           })
         );
       } else {
         const stopTime = performance.now();
-        const time = startTime - stopTime;
+        const time = stopTime - startTime;
         console.log(time);
         return result;
       }
