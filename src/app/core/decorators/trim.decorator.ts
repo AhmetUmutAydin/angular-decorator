@@ -1,21 +1,18 @@
 export function Trim() {
   return function (target: Object, propertyKey: string) {
-    let value: string;
-    const getter = function () {
-      return value;
-    };
-    const setter = function (newVal: string) {
-      if (typeof newVal !== 'string') {
-        Object.defineProperty(target, 'errors', {
-          value: `Value must be string`,
-        });
-      } else {
-        value = newVal.trim();
-      }
-    };
+    const symbol = Symbol();
+
     Object.defineProperty(target, propertyKey, {
-      get: getter,
-      set: setter,
+      get: function () {
+        return this[symbol];
+      },
+      set: function (newVal: string) {
+        if (typeof newVal !== 'string') {
+          return newVal;
+        } else {
+          this[symbol] = newVal.trim();
+        }
+      },
     });
   };
 }

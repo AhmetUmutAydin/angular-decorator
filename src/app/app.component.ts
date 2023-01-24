@@ -14,7 +14,7 @@ export class AppComponent {
   postsDecorator$: Observable<Post[]>;
 
   @Trim()
-  test = 'Test. ';
+  trimableString = 'Test. ';
 
   constructor(
     private postService: PostService,
@@ -22,6 +22,6 @@ export class AppComponent {
   ) {
     this.posts$ = this.postService.getPosts();
     this.postsDecorator$ = this.postsDecorator.getPosts();
-    console.log(this.test + ':');
+    console.log(this.trimableString + ':');
   }
 }
