@@ -7,11 +7,7 @@ export function Trim() {
         return this[symbol];
       },
       set: function (newVal: string) {
-        if (typeof newVal !== 'string') {
-          return newVal;
-        } else {
-          this[symbol] = newVal.trim();
-        }
+        this[symbol] = newVal.trim();
       },
     });
   };
