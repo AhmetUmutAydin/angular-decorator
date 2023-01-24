@@ -2,7 +2,7 @@ import { isObservable, of, tap } from 'rxjs';
 import { CacheType } from '../enums';
 
 export const Caching = (cacheType: CacheType = CacheType.SessionStorage) => {
-  return (target: any, prop: string, descriptor: any) => {
+  return (target: any, prop: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any) {
       const key = createKey(target.constructor.name, prop, args);

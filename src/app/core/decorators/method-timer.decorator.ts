@@ -1,7 +1,7 @@
 import { isObservable, tap } from 'rxjs';
 
 export const MethodTimer = () => {
-  return (target: any, propertyKey: string, descriptor: any) => {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args: any[]) {

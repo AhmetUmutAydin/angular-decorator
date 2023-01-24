@@ -56,14 +56,13 @@ export const ApiRequest = (endpoint: string, httpMethod: HttpMethod) => {
   };
 };
 
-export const UrlParam = (param) => {
+export const UrlParam = (param: any) => {
   return (target: BaseRest, propertyKey: string, propertyIndex: number) => {
     const urlParam = {
       key: param,
       propertyKey,
       index: propertyIndex,
     };
-
     if (Array.isArray(target[param_key])) {
       target[param_key].push(urlParam);
     } else {
