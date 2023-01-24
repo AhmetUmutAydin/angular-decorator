@@ -1,5 +1,5 @@
 export function Trim() {
-  return function (target: Object, propertyKey: string) {
+  return function (target: any, propertyKey: string) {
     const symbol = Symbol();
 
     Object.defineProperty(target, propertyKey, {
