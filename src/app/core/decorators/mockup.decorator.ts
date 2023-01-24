@@ -1,10 +1,10 @@
 import { of } from 'rxjs';
 
-export const Mockup = (mock: {}, fn?: ({}) => {}) => {
+export const Mockup = (mock: {}, mapperFn?: ({}) => {}) => {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     descriptor.value = function (...args: any[]) {
-      if (fn) {
-        return of(fn(mock));
+      if (mapperFn) {
+        return of(mapperFn(mock));
       } else {
         return of(mock);
       }

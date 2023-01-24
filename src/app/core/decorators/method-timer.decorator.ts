@@ -6,7 +6,7 @@ export const MethodTimer = () => {
 
     descriptor.value = function (...args: any[]) {
       const startTime = performance.now();
-      const result = originalMethod.apply(this);
+      const result = originalMethod.apply(this, args);
       if (isObservable(result)) {
         return result.pipe(
           tap(() => {
