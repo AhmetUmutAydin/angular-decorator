@@ -13,8 +13,8 @@ export class PostService {
 
   constructor(public httpClient: HttpClient) {}
 
-  // @MethodTimer()
-  // @Mockup(PostMockUp.posts)
+  @MethodTimer()
+  @Mockup(PostMockUp.posts)
   getPosts(): Observable<Post[]> {
     return this.httpClient.get<Post[]>(this.url);
   }

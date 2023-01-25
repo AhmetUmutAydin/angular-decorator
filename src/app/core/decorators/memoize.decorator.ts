@@ -1,4 +1,5 @@
 import * as memoizee from 'memoizee';
+// Can't install memoizee in stackblitz
 
 export const memoize = (config: {}) => {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
